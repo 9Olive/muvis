@@ -142,7 +142,7 @@ data_preproc <- function(data,
 
   # Set outlier to NA
   if (detect.outliers) {
-    cont_vars <- sapply(data, function(x)! is.factor(x))
+    cont_vars <- sapply(data, function(x)! is.character(x))
     data[, cont_vars] <- df_anomaly_detector(data[, cont_vars])
   }
 
@@ -155,6 +155,6 @@ data_preproc <- function(data,
   data.frame(lapply(data, function(x)
     if (is.numeric(x) == T)
       impute.continuous(x)
-    else if (is.factor(x) == T)
+    else if (is.character(x) == T)
       impute.factor(x)))
 }
